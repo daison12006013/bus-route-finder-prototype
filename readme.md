@@ -30,7 +30,7 @@ Execute `php artisan migrate` and `php artisan bus-router-sg:parse-json`
 To test the class matching logic, an example below will help you.
 
 ```
-$instance = new Daison\BusRouterSg\Match\Match(
+$instance = new Daison\BusRouterSg\Util\Match(
     $myLat = 1.37313809346006,
     $myLng = 103.89156818388481,
     $destLat = 1.38372439268243,

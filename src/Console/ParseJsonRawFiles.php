@@ -38,55 +38,55 @@ class ParseJsonRawFiles extends Command
      */
     public function handle()
     {
-        // foreach ($this->getBuses() as $bus) {
-        //     try {
-        //         Models\Bus::where('bus_number', $bus)->firstOrFail();
-        //
-        //         continue;
-        //     } catch (\Throwable $e) {
-        //         // do nothing...
-        //     }
-        //
-        //     Models\Bus::create($bus);
-        // }
-        //
-        // foreach ($this->getBusServices() as $service) {
-        //     try {
-        //         Models\BusService::where('bus_id', $service['bus_id'])->firstOrFail();
-        //
-        //         continue;
-        //     } catch (\Throwable $e) {
-        //         // do nothing...
-        //     }
-        //
-        //     Models\BusService::create($service);
-        // }
-        //
-        // foreach ($this->getBusStops() as $busStop) {
-        //     try {
-        //         Models\BusStop::where('bus_station_code', $busStop['bus_station_code'])->firstOrFail();
-        //
-        //         continue;
-        //     } catch (\Throwable $e) {
-        //         // do nothing
-        //     }
-        //
-        //     Models\BusStop::create($busStop);
-        // }
-        //
-        // foreach ($this->getBusStopServices() as $busStopService) {
-        //     try {
-        //         Models\BusStopService::where('bus_stop_id', $busStopService['bus_stop_id'])
-        //             ->where('bus_id', $busStopService['bus_id'])
-        //             ->firstOrFail();
-        //
-        //         continue;
-        //     } catch (\Throwable $e) {
-        //         // do nothing
-        //     }
-        //
-        //     Models\BusStopService::create($busStopService);
-        // }
+        foreach ($this->getBuses() as $bus) {
+            try {
+                Models\Bus::where('bus_number', $bus)->firstOrFail();
+
+                continue;
+            } catch (\Throwable $e) {
+                // do nothing...
+            }
+
+            Models\Bus::create($bus);
+        }
+
+        foreach ($this->getBusServices() as $service) {
+            try {
+                Models\BusService::where('bus_id', $service['bus_id'])->firstOrFail();
+
+                continue;
+            } catch (\Throwable $e) {
+                // do nothing...
+            }
+
+            Models\BusService::create($service);
+        }
+
+        foreach ($this->getBusStops() as $busStop) {
+            try {
+                Models\BusStop::where('bus_station_code', $busStop['bus_station_code'])->firstOrFail();
+
+                continue;
+            } catch (\Throwable $e) {
+                // do nothing
+            }
+
+            Models\BusStop::create($busStop);
+        }
+
+        foreach ($this->getBusStopServices() as $busStopService) {
+            try {
+                Models\BusStopService::where('bus_stop_id', $busStopService['bus_stop_id'])
+                    ->where('bus_id', $busStopService['bus_id'])
+                    ->firstOrFail();
+
+                continue;
+            } catch (\Throwable $e) {
+                // do nothing
+            }
+
+            Models\BusStopService::create($busStopService);
+        }
 
         foreach ($this->getBusRoutes() as $busRoute) {
             try {

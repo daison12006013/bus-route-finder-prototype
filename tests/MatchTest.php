@@ -1,13 +1,13 @@
 <?php
 
-use Daison\BusRouterSg\Match;
+use Daison\BusRouterSg\Util;
 use Daison\BusRouterSg\Models;
 
 class MatchTest extends Tests\TestCase
 {
     public function testSampleRoute()
     {
-        $match = new Match\Match(
+        $match = new Util\Match(
             # my lat and lng
             1.37313809346006,
             103.89156818388481,

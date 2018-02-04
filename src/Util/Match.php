@@ -1,6 +1,6 @@
 <?php
 
-namespace Daison\BusRouterSg\Match;
+namespace Daison\BusRouterSg\Util;
 
 use Hrgruri\Dijkstra\Graph;
 use Daison\BusRouterSg\Models;
