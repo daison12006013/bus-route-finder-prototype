@@ -156,9 +156,9 @@ class Match
 
         $graph = $this->loadAllBusRoutes();
 
-        $graphResults = $graph->search($start->lat.':'.$start->lng, $end->lat.':'.$end->lng);
+        return $graphResults = $graph->search($start->lat.':'.$start->lng, $end->lat.':'.$end->lng);
 
-        return $this->getBuses($graphResults);
+        // return $this->getBuses($graphResults);
     }
 
     /**
