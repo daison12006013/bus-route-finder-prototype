@@ -1,0 +1,27 @@
+{
+    "name": "daison/bus-router-sg",
+    "description": "A route finder that helps you which bus is the best to ride to go to your destination.",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daison Carino",
+            "email": "daison12006013@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "taniko/dijkstra": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Daison\\BusRouterSg\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Daison\\BusRouterSg\\BusRouterSgServiceProvider"
+            ]
+        }
+    }
+}
