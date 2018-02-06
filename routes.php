@@ -6,7 +6,7 @@ if (! function_exists('route_name')) {
     }
 }
 
-Route::namespace('Daison\BusRouterSg\Http\Controllers')->middleware(['web'])->prefix('bus-router-sg')->group(function () {
+Route::namespace('Daison\BusRouterSg\Http\Controllers')->middleware(['web'])->prefix(config('bus_router_sg.route_prefix', 'bus-router-sg'))->group(function () {
     # authenticated users
     Route::group(['middleware' => 'auth'], function () {
         Route::get('buses', 'Buses\Lists')->name(route_name('buses'));
