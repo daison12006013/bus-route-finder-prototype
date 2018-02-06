@@ -90,7 +90,7 @@ class Match
      */
     protected function getBuilder()
     {
-        return Models\BusRoute::select('route', 'bus_number', 'bus_station_code', 'lat', 'lng')
+        return Models\BusRoute::select('route', 'bus_number', 'bus_station_code', 'lat', 'lng', 'name')
             ->leftJoin('buses', 'buses.id', '=', 'bus_routes.bus_id')
             ->leftJoin('bus_stops', 'bus_stops.id', '=', 'bus_routes.bus_stop_id')
             ->orderBy('bus_routes.id', 'asc');
@@ -187,8 +187,8 @@ class Match
             ]);
         $builder->addSelect(\DB::raw($distance));
 
-        $builder->addSelect('bus_station_code');
         $builder->addSelect('name');
+        $builder->addSelect('bus_station_code');
         $builder->addSelect('lat');
         $builder->addSelect('lng');
 
@@ -216,9 +216,11 @@ class Match
                 ->get()->pluck('bus_number')->all();
         }
 
-        $routeBuses = collect($routeBuses)->values()->all();
-
         return $routeBuses;
+
+        // $routeBuses = collect($routeBuses)->values()->all();
+        //
+        // return $routeBuses;
 
         // $scores = [];
         //
