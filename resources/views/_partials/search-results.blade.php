@@ -1,4 +1,4 @@
-<h3>Suggested Routes</h3>
+<h3>Final Routes</h3>
 
 <div class="alert alert-info">
     Currently working on the sorting of bus matching on each latitude and longitude.
