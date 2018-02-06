@@ -19,7 +19,7 @@ class Welcome extends Controller
         $match = new Util\Match($myLat, $myLng, $destLat, $destLng);
 
         $params['myNearestBus'] = $match->getNearestBus($myLat, $myLng)->paginate(10, ['*'], 'my_page');
-        $params['destNearestBus'] = $match->getNearestBus($destLat, $destLng)->paginate(10, ['*'], 'dest_page');
+        // $params['destNearestBus'] = $match->getNearestBus($destLat, $destLng)->paginate(10, ['*'], 'dest_page');
         $params['routes'] = $match->getBuses($this->getRoutes($match));
 
         $params['user'] = $request->user();

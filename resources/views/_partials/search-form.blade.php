@@ -5,12 +5,12 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="">Latitude</label>
-                <input class="form-control" type="text" name="my_lat" value="{{ request()->get('dest_lng', $myLat) }}">
+                <input class="form-control" type="text" name="my_lat" value="{{ request()->get('my_lat', $myLat) }}">
             </div>
 
             <div class="form-group">
                 <label for="">Longitude</label>
-                <input class="form-control" type="text" name="my_lng" value="{{ request()->get('dest_lng', $myLng) }}">
+                <input class="form-control" type="text" name="my_lng" value="{{ request()->get('my_lng', $myLng) }}">
             </div>
         </div>
     </div>
@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 <label for="">Latitude</label>
-                <input class="form-control" type="text" name="dest_lat" value="{{ request()->get('dest_lng', $destLat) }}">
+                <input class="form-control" type="text" name="dest_lat" value="{{ request()->get('dest_lat', $destLat) }}">
             </div>
 
             <div class="form-group">
