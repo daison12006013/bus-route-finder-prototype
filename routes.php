@@ -17,6 +17,9 @@ Route::namespace('Daison\BusRouterSg\Http\Controllers')->middleware(['web'])->pr
 
     # public api's
     Route::get('/', 'Welcome')->name(route_name('welcome'));
-    Route::get('login', 'Auth\Login')->name(route_name('login'));
-    Route::post('login', 'Auth\LoginAttempt')->name(route_name('login-attempt'));
+
+    Route::group(['middleware' => ['guest']], function () {
+        Route::get('login', 'Auth\Login')->name(route_name('login'));
+        Route::post('login', 'Auth\LoginAttempt')->name(route_name('login-attempt'));
+    });
 });
