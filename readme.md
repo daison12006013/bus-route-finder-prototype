@@ -65,11 +65,16 @@ Run `phpunit` under this root folder.
 
 # Pending Tasks for this Prototype
 
-- [ ] Matching Logic
+- [x] Matching Logic
     - [x] Finding the nearest bus to take and the nearest bus to your destination.
     - [x] Using Dijkstra's Algorithm to connect each bus routes (lat and long).
-    - [ ] Compile the lists of buses to based on the routes (lat and long).
+    - [x] Compile the lists of buses to based on the routes (lat and long).
     - [x] Test
-- [ ] User Interface
-    - [ ] User Login
-    - [ ] Form that needs to put the current location or get the current user's location using the browser api.
+- [x] User Interface
+    - [x] User Login
+    - [x] Form that needs to put the current location or get the current user's location using the browser api.
+- [ ] CRUD for buses
+- [ ] CRUD for bus stations
+- [ ] CRUD for locations
+- [ ] Search using Postal Code
+- [ ] Search using a freeform address input and determine the postal code
