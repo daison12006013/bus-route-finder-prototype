@@ -1,4 +1,4 @@
-<form method="GET" action="{{ route('bus-router-sg::welcome') }}">
+<form method="GET" action="{{ route(route_name('welcome')) }}">
     <h5>Your Location</h5>
 
     <div class="row">

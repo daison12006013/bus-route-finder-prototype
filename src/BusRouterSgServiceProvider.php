@@ -36,6 +36,6 @@ class BusRouterSgServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        # code here...
+        include_once __DIR__.'/../helpers.php';
     }
 }

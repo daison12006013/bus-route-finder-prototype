@@ -1,15 +1,11 @@
 <?php
 
-if (! function_exists('route_name')) {
-    function route_name($name) {
-        return sprintf('bus-router-sg::%s', $name);
-    }
-}
-
 Route::namespace('Daison\BusRouterSg\Http\Controllers')->middleware(['web'])->prefix(config('bus_router_sg.route_prefix', 'bus-router-sg'))->group(function () {
     # authenticated users
     Route::group(['middleware' => 'auth'], function () {
         Route::get('auth-static-view', 'StaticViewAuthenticated')->name(route_name('static-view-authenticated'));
+
+        Route::any('logout', 'Auth\Logout')->name(route_name('logout'));
 
         Route::get('buses', 'Buses\Lists')->name(route_name('buses'));
         Route::post('buses', 'Buses\Add')->name(route_name('buses-add-attempt'));
