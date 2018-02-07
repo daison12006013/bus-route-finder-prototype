@@ -1,6 +1,6 @@
 <h3>{{ $title }}</h3>
 
-<table class="final-routes table">
+<table class="final-routes table table-responsive">
     <thead class="thead-dark">
         <tr>
             <th>Name</th>
@@ -25,8 +25,8 @@
     @endforelse
 </table>
 
-<div class="row">
+{{-- <div class="row">
     <div class="mx-auto">
         {{ $nearestBuses->links() }}
     </div>
-</div>
+</div> --}}
