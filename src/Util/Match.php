@@ -156,9 +156,9 @@ class Match
 
         $graph = $this->loadAllBusRoutes();
 
-        return $graphResults = $graph->search($start->lat.':'.$start->lng, $end->lat.':'.$end->lng);
+        $graphResults = $graph->search($start->lat.':'.$start->lng, $end->lat.':'.$end->lng);
 
-        // return $this->getBuses($graphResults);
+        return $this->getBuses($graphResults);
     }
 
     /**
@@ -198,48 +198,113 @@ class Match
     /**
      * Filter best buses to ride.
      *
-     * @TODO combine all routes and find the best buses to take
+     * @deprecated To separate this method on a class based to be maintainable
      * @param  Hrgruri\Dijkstra\Graph $routes
      * @return array
      */
     public function getBuses($routes)
     {
-        $routeBuses = [];
+        // dd($routes);
+
+        $setOfBuses = [];
+        $formatted = [];
 
         # we need to know which buses belongs to each graph
         foreach ($routes as $idx => $route) {
             $explodedRoute = explode(':', $route);
 
-            $routeBuses[$route] = (clone $this->getBuilder())
+            $results = (clone $this->getBuilder())
                 ->where('lat', $explodedRoute[0])
                 ->where('lng', $explodedRoute[1])
-                ->get()->pluck('bus_number')->all();
+                ->get();
+
+            $setOfBuses[] = $results->pluck('bus_number')->values()->all();
+            $formatted[] = $results->toArray();
         }
 
-        return $routeBuses;
+        $finals = [];
+        $skipLoop = 0;
 
-        // $routeBuses = collect($routeBuses)->values()->all();
-        //
-        // return $routeBuses;
+        foreach ($setOfBuses as $latLng => $buses) {
+            if ($skipLoop > 0) {
+                $skipLoop--;
 
-        // $scores = [];
-        //
-        // for ($i = 0; $i < count($routeBuses); $i++) {
-        //     $buses = $routeBuses[$i];
-        //
-        //     if (! isset($routeBuses[$i+1])) {
-        //         continue;
-        //     }
-        //
-        //     $busesToCompare = $routeBuses[$i+1];
-        //
-        //     // foreach ($buses as $bus) {
-        //     //     if (in_array($bus, $busesToCompare) !== false) {
-        //     //         $scores[$bus] = isset($scores[$bus]) ? $scores[$bus] + 1 : 1;
-        //     //     } else {
-        //     //         break 2;
-        //     //     }
-        //     // }
-        // }
+                continue;
+            }
+
+            $scores = [];
+            $ignored = [];
+
+            foreach ($buses as $bus) {
+                $scores[$bus] = 1;
+
+                foreach ($setOfBuses as $latLng2 => $buses2) {
+                    if ($latLng >= $latLng2) {
+                        continue;
+                    }
+
+                    if ($latLng2-1 > 0 && in_array($bus, $setOfBuses[$latLng2-1], true) === false) {
+                        $ignored[] = $bus;
+
+                        continue;
+                    }
+
+                    if (in_array($bus, $ignored, true) !== false) {
+                        continue;
+                    }
+
+                    if (in_array($bus, $buses2, true) !== false) {
+                        $scores[$bus] = isset($scores[$bus]) ? $scores[$bus] + 1 : 1;
+                    }
+                }
+            }
+
+            $maxKeys = array_keys($scores, max($scores));
+            $maxValue = $scores[reset($maxKeys)]; # get first index
+
+            $finals[$latLng] = [
+                'buses' => $maxKeys,
+                'bus_stops' => $maxValue,
+            ];
+
+            $totalBusStops = array_sum(array_map(function($arr) {
+                return $arr['bus_stops'];
+            }, $finals));
+
+            $loopCounts = (count($finals) - 1);
+
+            if (($totalBusStops - $loopCounts) >= count($setOfBuses)) {
+                break;
+            }
+
+            # since `continue $variable` was removed in php 5.4.0, we need to pass it on top
+            # - make index + 1 to eliminate index 0
+            // $skipLoop = ($totalBusStops - ($latLng + 1)) - 1;
+            // $skipLoop = ($totalBusStops - ($latLng + 1));
+            $skipLoop = $maxValue - 2;
+        }
+
+        // dd($finals);
+
+        $ret = [];
+
+        foreach ($finals as $busStopIndex => $final) {
+            $locations = [];
+
+            for ($i = $busStopIndex; $i < ($final['bus_stops'] + $busStopIndex); $i++) {
+                $locations[$i] = collect(collect($formatted[$i])->first())
+                    ->only('lat', 'lng', 'name', 'bus_station_code')
+                    ->all();
+            }
+
+            $ret[] = [
+                'buses' => $final['buses'],
+                'locations' => $locations,
+            ];
+        }
+
+        // dd($ret);
+
+        return $ret;
     }
 }
