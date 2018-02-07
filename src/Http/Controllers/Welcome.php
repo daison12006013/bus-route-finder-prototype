@@ -10,10 +10,10 @@ class Welcome extends Controller
     public function __invoke(Request $request)
     {
         $params = [
-            'myLat' => $myLat = $request->get('my_lat', 1.37313809346006),
-            'myLng' => $myLng = $request->get('my_lng', 103.89156818388481),
-            'destLat' => $destLat = $request->get('dest_lat', 1.38372439268243),
-            'destLng' => $destLng = $request->get('dest_lng', 103.76068878232401),
+            'myLat' => $myLat = $request->get('my_lat', 1.35858),
+            'myLng' => $myLng = $request->get('my_lng', 103.98402),
+            'destLat' => $destLat = $request->get('dest_lat', 1.25435),
+            'destLng' => $destLng = $request->get('dest_lng', 103.82639),
         ];
 
         $match = new Util\Match($myLat, $myLng, $destLat, $destLng);
