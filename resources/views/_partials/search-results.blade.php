@@ -30,7 +30,7 @@
             <tr>
                 <td colspan="2">
                     <h4 class="text-center">
-                        <span class="badge badge-success">Start</span>
+                        <span class="badge badge-seconday">Start</span>
                     </h4>
                 </td>
             </tr>
@@ -63,7 +63,7 @@
             <tr>
                 <td colspan="2">
                     <h4 class="text-center">
-                        <span class="badge badge-success">Ends here!</span>
+                        <span class="badge badge-seconday">Ends here!</span>
                     </h4>
                 </td>
             </tr>
