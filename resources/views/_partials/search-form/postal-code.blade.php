@@ -5,7 +5,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 {{-- <label for="">Postal Code</label> --}}
-                <input placeholder="e.g 348573" class="form-control" type="text" name="my_postal_code" value="{{ request()->get('my_postal_code', isset($myPostalCode) ? $myPostalCode : null) }}">
+                <input placeholder="e.g 348573" class="form-control" type="text" name="my_postal_code" value="{{ old('my_postal_code', request()->get('my_postal_code', isset($myPostalCode) ? $myPostalCode : null)) }}">
             </div>
         </div>
     </div>
@@ -16,7 +16,7 @@
         <div class="col-md-12">
             <div class="form-group">
                 {{-- <label for="">Postal Code</label> --}}
-                <input placeholder="e.g 188979" class="form-control" type="text" name="dest_postal_code" value="{{ request()->get('dest_postal_code', isset($destPostalCode) ? $destPostalCode : null) }}">
+                <input placeholder="e.g 188979" class="form-control" type="text" name="dest_postal_code" value="{{ old('dest_postal_code', request()->get('dest_postal_code', isset($destPostalCode) ? $destPostalCode : null)) }}">
             </div>
         </div>
     </div>
