@@ -23,8 +23,10 @@ class StaticViewRequest extends FormRequest
      */
     public function rules()
     {
+        $blades = \Daison\BusRouterSg\Http\Controllers\StaticView::ALLOWED_BLADES;
+
         return [
-            'blade' => sprintf('in:%s', implode(',', \Daison\BusRouterSg\Http\Controllers\StaticView::ALLOWED_BLADES)),
+            'blade' => sprintf('in:%s', implode(',', $blades)),
         ];
     }
 }

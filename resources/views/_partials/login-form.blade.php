@@ -1,4 +1,4 @@
-<form method="POST" action="{{ route(route_name('login-attempt')) }}">
+<form method="POST" action="{{ route(package('login-attempt')) }}">
     {{ csrf_field() }}
     <h5>Login</h5>
 

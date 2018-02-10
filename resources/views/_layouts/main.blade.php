@@ -9,24 +9,46 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/4.0.0-beta.3/lux/bootstrap.min.css">
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-        @yield('header')
+
         <style media="screen">
             .margin-top-3 {
-                margin-top: 3em;
+                margin-top: 3rem;
             }
 
             .table th, .table td {
                 padding: 0.75rem !important;
             }
+
+            @media (min-width: 576px) {
+                #search-container .modal-dialog {
+                    max-width: 80vw;
+                    margin: 1.75rem auto;
+                }
+            }
+
+            .nav-tabs .nav-item {
+                margin-right: 0;
+            }
+
+            #search-form {
+                margin-top: 1rem;
+            }
+
+            #search-form-tab-contents .tab-pane {
+                margin-top: 1rem;
+            }
         </style>
+
+        @stack('styles')
     </head>
     <body>
-        @include('bus-router-sg::_partials.navbar')
+        @include(package('_partials.alert-box'))
+        @include(package('_partials.navbar'))
 
         <div class="container-fluid">
             @yield('content')
         </div>
 
-        @yield('footer')
+        @stack('scripts')
     </body>
 </html>

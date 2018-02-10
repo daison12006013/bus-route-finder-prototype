@@ -1,35 +1,27 @@
-<form method="GET" action="{{ route(route_name('welcome')) }}">
-    <h5>Your Location</h5>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="">Latitude</label>
-                <input class="form-control" type="text" name="my_lat" value="{{ request()->get('my_lat', $myLat) }}">
-            </div>
-
-            <div class="form-group">
-                <label for="">Longitude</label>
-                <input class="form-control" type="text" name="my_lng" value="{{ request()->get('my_lng', $myLng) }}">
-            </div>
+@php
+    $defaultTab = Daison\BusRouterSg\Http\Controllers\Welcome::SEARCH_BY_POSTAL_CODE;
+@endphp
+<div id="search-form">
+    <ul id="search-form-tab-links" class="nav nav-tabs">
+        {{-- <li class="nav-item">
+            <a class="nav-link active show" data-toggle="tab" href="#address">Address</a>
+        </li> --}}
+        <li class="nav-item">
+            <a class="nav-link {{ request()->get('submit', $defaultTab) === Daison\BusRouterSg\Http\Controllers\Welcome::SEARCH_BY_POSTAL_CODE ? 'active show' : '' }}" data-toggle="tab" href="#postal-code">Postal Code</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link {{ request()->get('submit', $defaultTab) === Daison\BusRouterSg\Http\Controllers\Welcome::SEARCH_BY_LAT_LNG ? 'active show' : '' }}" data-toggle="tab" href="#lat-lng">Lat &amp; Lng</a>
+        </li>
+    </ul>
+    <div id="search-form-tab-contents" class="tab-content">
+        {{-- <div class="tab-pane fade active show" id="address">
+            @include(package('_partials.search-form.free-form-address'))
+        </div> --}}
+        <div class="tab-pane fade {{ request()->get('submit', $defaultTab) === Daison\BusRouterSg\Http\Controllers\Welcome::SEARCH_BY_POSTAL_CODE ? 'active show' : '' }}" id="postal-code">
+            @include(package('_partials.search-form.postal-code'))
+        </div>
+        <div class="tab-pane fade {{ request()->get('submit', $defaultTab) === Daison\BusRouterSg\Http\Controllers\Welcome::SEARCH_BY_LAT_LNG ? 'active show' : '' }}" id="lat-lng">
+            @include(package('_partials.search-form.latlng'))
         </div>
     </div>
-
-    <h5>Your Destination</h5>
-
-    <div class="row">
-        <div class="col-md-12">
-            <div class="form-group">
-                <label for="">Latitude</label>
-                <input class="form-control" type="text" name="dest_lat" value="{{ request()->get('dest_lat', $destLat) }}">
-            </div>
-
-            <div class="form-group">
-                <label for="">Longitude</label>
-                <input class="form-control" type="text" name="dest_lng" value="{{ request()->get('dest_lng', $destLng) }}">
-            </div>
-        </div>
-    </div>
-
-    <button type="submit" name="submit" class="btn btn-success btn-block">Search</button>
-</form>
+</div>

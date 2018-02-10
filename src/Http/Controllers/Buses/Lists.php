@@ -6,6 +6,6 @@ class Lists extends \Daison\BusRouterSg\Http\Controllers\Controller
 {
     public function __invoke()
     {
-        return view('bus-router-sg::buses.lists');
+        return view(package('buses.lists'));
     }
 }

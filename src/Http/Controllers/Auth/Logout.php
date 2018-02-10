@@ -8,6 +8,6 @@ class Logout extends \Daison\BusRouterSg\Http\Controllers\Controller
     {
         \Auth::logout();
 
-        return redirect(route(route_name('welcome')));
+        return redirect(route(package('welcome')));
     }
 }
