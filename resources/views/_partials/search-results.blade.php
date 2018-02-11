@@ -1,13 +1,3 @@
-@php
-    $randomizeBadge = function ($records) {
-        return collect($records)->map(function ($record) {
-            $badges = ['success', 'info', 'primary', 'danger', 'dark'];
-
-            return sprintf('<span class="badge badge-%s">%s</span>', $badges[array_rand($badges)], $record);
-        })->all();
-    };
-@endphp
-
 <h3>Final Routes</h3>
 
 <table class="final-routes table">
@@ -39,9 +29,9 @@
         <tr>
             <td>
                 @if (count($route['buses']) > 1)
-                    Take any of these buses {!! implode('&nbsp;', call_user_func($randomizeBadge, $route['buses'])) !!}
+                    Take any of these buses {!! implode('&nbsp;', random_badge($route['buses'])) !!}
                 @else
-                    Take this bus {!! implode('&nbsp;', call_user_func($randomizeBadge, $route['buses'])) !!}
+                    Take this bus {!! implode('&nbsp;', random_badge($route['buses'])) !!}
                 @endif
             </td>
             <td>

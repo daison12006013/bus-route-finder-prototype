@@ -15,4 +15,14 @@ class BusStop extends Model
         'lng',
         'name',
     ];
+
+    /**
+     * A bus stop belongs to many buses.
+     *
+     * @return mixed
+     */
+    public function buses()
+    {
+        return $this->belongsToMany(Bus::class, 'bus_routes', 'bus_stop_id', 'bus_id');
+    }
 }

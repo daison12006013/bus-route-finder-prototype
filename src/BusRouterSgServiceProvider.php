@@ -3,6 +3,7 @@
 namespace Daison\BusRouterSg;
 
 use Illuminate\Support\ServiceProvider;
+use Daison\BusRouterSg\Http\Middleware;
 
 /**
  * [BusRouterSgServiceProvider description]
@@ -37,5 +38,8 @@ class BusRouterSgServiceProvider extends ServiceProvider
     public function register()
     {
         include_once __DIR__.'/../helpers.php';
+
+        $this->app['router']->aliasMiddleware(package('guest', 'middleware'), Middleware\RedirectIfAuthenticated::class);
+        $this->app['router']->aliasMiddleware(package('auth', 'middleware'), Middleware\RedirectIfNotAuthenticated::class);
     }
 }

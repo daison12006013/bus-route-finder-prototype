@@ -2,23 +2,20 @@
 
 $prefix = config('bus_router_sg.route_prefix', 'bus-prototype');
 
-Route::namespace('Daison\BusRouterSg\Http\Controllers')->middleware(['web'])->prefix($prefix)->group(function () {
-    # authenticated users
-    Route::group(['middleware' => 'auth'], function () {
-        Route::any('logout', 'Auth\Logout')->name(package('logout'));
+Route::namespace('Daison\BusRouterSg\Http\Controllers')
+    ->middleware(['web'])
+    ->prefix($prefix)
+    ->group(function () {
+        # public routes
+        require_once __DIR__.'/routes/public.php';
 
-        Route::get('buses', 'Buses\Lists')->name(package('buses'));
-        Route::post('buses', 'Buses\Add')->name(package('buses-add-attempt'));
-        Route::put('buses', 'Buses\Update')->name(package('buses-update-attempt'));
-        Route::delete('buses', 'Buses\Delete')->name(package('buses-delete'));
+        # auth routes
+        Route::group(['middleware' => [package('auth', 'middleware')]], function () {
+            require_once __DIR__.'/routes/auth.php';
+        });
+
+        # limited to guest routes
+        Route::group(['middleware' => [package('guest', 'middleware')]], function () {
+            require_once __DIR__.'/routes/guest.php';
+        });
     });
-
-    # public api's
-    Route::get('/', 'Welcome')->name(package('welcome'));
-    Route::get('static', 'StaticView')->name(package('static-view'));
-
-    Route::group(['middleware' => ['guest']], function () {
-        Route::get('login', 'Auth\Login')->name(package('login'));
-        Route::post('login', 'Auth\LoginAttempt')->name(package('login-attempt'));
-    });
-});
