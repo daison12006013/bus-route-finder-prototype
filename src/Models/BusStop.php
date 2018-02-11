@@ -23,6 +23,7 @@ class BusStop extends Model
      */
     public function buses()
     {
-        return $this->belongsToMany(Bus::class, 'bus_routes', 'bus_stop_id', 'bus_id');
+        return $this->belongsToMany(Bus::class, 'bus_routes', 'bus_stop_id', 'bus_id')
+            ->orderBy('buses.bus_number', 'asc');
     }
 }

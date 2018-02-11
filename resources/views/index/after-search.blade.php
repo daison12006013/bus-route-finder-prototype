@@ -30,7 +30,7 @@ This is the after you clicked the search button.
     </div>
 </div>
 
-<div class="margin-top-3 row">
+<div class="mt-4 row">
     <div class="col-md-12 text-center">
         <p class="text-primary"><small>
             @if (request()->get('submit') === Daison\BusRouterSg\Http\Controllers\Welcome::SEARCH_BY_LAT_LNG)
@@ -55,7 +55,7 @@ This is the after you clicked the search button.
     </div>
 </div>
 
-<div class="margin-top-3 row">
+<div class="mt-4 row">
     <div class="col-md-12">
         <div class="row">
             <div class="col-md-12">

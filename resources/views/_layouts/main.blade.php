@@ -12,7 +12,7 @@
         <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
         <style media="screen">
-            .margin-top-3 {
+            .mt-4 {
                 margin-top: 3rem;
             }
 
